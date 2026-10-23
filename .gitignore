@@ -1,0 +1,44 @@
+# Environments & Virtualenvs
+.venv/
+venv/
+ENV/
+env/
+FactSheetAI/.venv/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+FactSheetAI/**/__pycache__/
+
+# Testing & Linting
+.hypothesis/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+FactSheetAI/.hypothesis/
+FactSheetAI/.pytest_cache/
+FactSheetAI/.ruff_cache/
+FactSheetAI/.mypy_cache/
+
+# Builds & Distribution
+build/
+dist/
+*.egg-info/
+FactSheetAI/*.egg-info/
+
+# Unrelated standalone research folders
+Kalyan_Research/
+node_modules/
+
+# Raw heavy unparsed AMC factsheet PDFs
+FactSheetAI/data/raw/amc/icici/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini

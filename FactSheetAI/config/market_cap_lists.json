@@ -1,0 +1,12 @@
+{
+  "market_cap_rule": {
+    "source": "AMFI half-yearly average market capitalisation ranking",
+    "large_cap_constituents": "top 100 rows, ranked by average all-exchanges market capitalisation",
+    "effective_date_policy": "Use the list in force on the portfolio month; never apply one list to all months."
+  },
+  "lists": [
+    {"effective_date": "2025-06-30", "path": "data/raw/amfi/amfi_caps_2025-06.xlsx", "covers_months": ["2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12"]},
+    {"effective_date": "2025-12-31", "path": "data/raw/amfi/amfi_caps_2025.xlsx", "covers_months": ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06"]},
+    {"effective_date": "2026-06-30", "path": "data/raw/amfi/amfi_caps_2026.xlsx", "covers_months": ["2026-07", "2026-08", "2026-09", "2026-10", "2026-11", "2026-12"]}
+  ]
+}

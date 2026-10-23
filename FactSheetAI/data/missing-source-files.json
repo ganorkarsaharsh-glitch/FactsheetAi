@@ -1,0 +1,683 @@
+{
+  "window": [
+    "2025-07",
+    "2026-06"
+  ],
+  "required_months": 12,
+  "missing_scheme_month_count": 96,
+  "missing_scheme_months": [
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2025-07",
+      "expected_file": "data/raw/amc/icici/2025-07.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2025-08",
+      "expected_file": "data/raw/amc/icici/2025-08.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2025-09",
+      "expected_file": "data/raw/amc/icici/2025-09.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2025-10",
+      "expected_file": "data/raw/amc/icici/2025-10.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2025-11",
+      "expected_file": "data/raw/amc/icici/2025-11.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2025-12",
+      "expected_file": "data/raw/amc/icici/2025-12.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2026-01",
+      "expected_file": "data/raw/amc/icici/2026-01.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2026-02",
+      "expected_file": "data/raw/amc/icici/2026-02.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2026-03",
+      "expected_file": "data/raw/amc/icici/2026-03.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2026-04",
+      "expected_file": "data/raw/amc/icici/2026-04.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2026-05",
+      "expected_file": "data/raw/amc/icici/2026-05.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120586",
+      "scheme_name": "ICICI Prudential Large Cap Fund",
+      "disclosure_month": "2026-06",
+      "expected_file": "data/raw/amc/icici/2026-06.<ISIN-bearing portfolio file>",
+      "reason": "An official monthly factsheet PDF is archived, but it omits holding ISINs and aggregates sub-1% equity positions; no complete ISIN-level portfolio source is available for this month."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2025-07",
+      "expected_file": "data/raw/amc/<adapter>/2025-07.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2025-08",
+      "expected_file": "data/raw/amc/<adapter>/2025-08.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2025-09",
+      "expected_file": "data/raw/amc/<adapter>/2025-09.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2025-10",
+      "expected_file": "data/raw/amc/<adapter>/2025-10.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2025-11",
+      "expected_file": "data/raw/amc/<adapter>/2025-11.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2025-12",
+      "expected_file": "data/raw/amc/<adapter>/2025-12.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2026-01",
+      "expected_file": "data/raw/amc/<adapter>/2026-01.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2026-02",
+      "expected_file": "data/raw/amc/<adapter>/2026-02.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2026-03",
+      "expected_file": "data/raw/amc/<adapter>/2026-03.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2026-04",
+      "expected_file": "data/raw/amc/<adapter>/2026-04.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2026-05",
+      "expected_file": "data/raw/amc/<adapter>/2026-05.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120152",
+      "scheme_name": "Kotak Large Cap Fund",
+      "disclosure_month": "2026-06",
+      "expected_file": "data/raw/amc/<adapter>/2026-06.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2025-07",
+      "expected_file": "data/raw/amc/<adapter>/2025-07.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2025-08",
+      "expected_file": "data/raw/amc/<adapter>/2025-08.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2025-09",
+      "expected_file": "data/raw/amc/<adapter>/2025-09.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2025-10",
+      "expected_file": "data/raw/amc/<adapter>/2025-10.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2025-11",
+      "expected_file": "data/raw/amc/<adapter>/2025-11.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2025-12",
+      "expected_file": "data/raw/amc/<adapter>/2025-12.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2026-01",
+      "expected_file": "data/raw/amc/<adapter>/2026-01.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2026-02",
+      "expected_file": "data/raw/amc/<adapter>/2026-02.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2026-03",
+      "expected_file": "data/raw/amc/<adapter>/2026-03.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2026-04",
+      "expected_file": "data/raw/amc/<adapter>/2026-04.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2026-05",
+      "expected_file": "data/raw/amc/<adapter>/2026-05.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120465",
+      "scheme_name": "Axis Large Cap Fund",
+      "disclosure_month": "2026-06",
+      "expected_file": "data/raw/amc/<adapter>/2026-06.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2025-07",
+      "expected_file": "data/raw/amc/<adapter>/2025-07.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2025-08",
+      "expected_file": "data/raw/amc/<adapter>/2025-08.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2025-09",
+      "expected_file": "data/raw/amc/<adapter>/2025-09.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2025-10",
+      "expected_file": "data/raw/amc/<adapter>/2025-10.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2025-11",
+      "expected_file": "data/raw/amc/<adapter>/2025-11.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2025-12",
+      "expected_file": "data/raw/amc/<adapter>/2025-12.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2026-01",
+      "expected_file": "data/raw/amc/<adapter>/2026-01.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2026-02",
+      "expected_file": "data/raw/amc/<adapter>/2026-02.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2026-03",
+      "expected_file": "data/raw/amc/<adapter>/2026-03.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2026-04",
+      "expected_file": "data/raw/amc/<adapter>/2026-04.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2026-05",
+      "expected_file": "data/raw/amc/<adapter>/2026-05.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118825",
+      "scheme_name": "Mirae Asset Large Cap Fund",
+      "disclosure_month": "2026-06",
+      "expected_file": "data/raw/amc/<adapter>/2026-06.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2025-07",
+      "expected_file": "data/raw/amc/<adapter>/2025-07.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2025-08",
+      "expected_file": "data/raw/amc/<adapter>/2025-08.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2025-09",
+      "expected_file": "data/raw/amc/<adapter>/2025-09.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2025-10",
+      "expected_file": "data/raw/amc/<adapter>/2025-10.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2025-11",
+      "expected_file": "data/raw/amc/<adapter>/2025-11.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2025-12",
+      "expected_file": "data/raw/amc/<adapter>/2025-12.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2026-01",
+      "expected_file": "data/raw/amc/<adapter>/2026-01.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2026-02",
+      "expected_file": "data/raw/amc/<adapter>/2026-02.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2026-03",
+      "expected_file": "data/raw/amc/<adapter>/2026-03.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2026-04",
+      "expected_file": "data/raw/amc/<adapter>/2026-04.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2026-05",
+      "expected_file": "data/raw/amc/<adapter>/2026-05.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119250",
+      "scheme_name": "DSP Large Cap Fund",
+      "disclosure_month": "2026-06",
+      "expected_file": "data/raw/amc/<adapter>/2026-06.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2025-07",
+      "expected_file": "data/raw/amc/<adapter>/2025-07.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2025-08",
+      "expected_file": "data/raw/amc/<adapter>/2025-08.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2025-09",
+      "expected_file": "data/raw/amc/<adapter>/2025-09.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2025-10",
+      "expected_file": "data/raw/amc/<adapter>/2025-10.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2025-11",
+      "expected_file": "data/raw/amc/<adapter>/2025-11.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2025-12",
+      "expected_file": "data/raw/amc/<adapter>/2025-12.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2026-01",
+      "expected_file": "data/raw/amc/<adapter>/2026-01.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2026-02",
+      "expected_file": "data/raw/amc/<adapter>/2026-02.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2026-03",
+      "expected_file": "data/raw/amc/<adapter>/2026-03.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2026-04",
+      "expected_file": "data/raw/amc/<adapter>/2026-04.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2026-05",
+      "expected_file": "data/raw/amc/<adapter>/2026-05.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "120656",
+      "scheme_name": "UTI - Large Cap Fund",
+      "disclosure_month": "2026-06",
+      "expected_file": "data/raw/amc/<adapter>/2026-06.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2025-07",
+      "expected_file": "data/raw/amc/<adapter>/2025-07.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2025-08",
+      "expected_file": "data/raw/amc/<adapter>/2025-08.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2025-09",
+      "expected_file": "data/raw/amc/<adapter>/2025-09.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2025-10",
+      "expected_file": "data/raw/amc/<adapter>/2025-10.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2025-11",
+      "expected_file": "data/raw/amc/<adapter>/2025-11.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2025-12",
+      "expected_file": "data/raw/amc/<adapter>/2025-12.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2026-01",
+      "expected_file": "data/raw/amc/<adapter>/2026-01.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2026-02",
+      "expected_file": "data/raw/amc/<adapter>/2026-02.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2026-03",
+      "expected_file": "data/raw/amc/<adapter>/2026-03.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2026-04",
+      "expected_file": "data/raw/amc/<adapter>/2026-04.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2026-05",
+      "expected_file": "data/raw/amc/<adapter>/2026-05.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "119528",
+      "scheme_name": "Aditya Birla Sun Life Large Cap Fund",
+      "disclosure_month": "2026-06",
+      "expected_file": "data/raw/amc/<adapter>/2026-06.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2025-07",
+      "expected_file": "data/raw/amc/<adapter>/2025-07.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2025-08",
+      "expected_file": "data/raw/amc/<adapter>/2025-08.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2025-09",
+      "expected_file": "data/raw/amc/<adapter>/2025-09.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2025-10",
+      "expected_file": "data/raw/amc/<adapter>/2025-10.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2025-11",
+      "expected_file": "data/raw/amc/<adapter>/2025-11.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2025-12",
+      "expected_file": "data/raw/amc/<adapter>/2025-12.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2026-01",
+      "expected_file": "data/raw/amc/<adapter>/2026-01.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2026-02",
+      "expected_file": "data/raw/amc/<adapter>/2026-02.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2026-03",
+      "expected_file": "data/raw/amc/<adapter>/2026-03.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2026-04",
+      "expected_file": "data/raw/amc/<adapter>/2026-04.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2026-05",
+      "expected_file": "data/raw/amc/<adapter>/2026-05.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    },
+    {
+      "scheme_code": "118531",
+      "scheme_name": "Franklin India Large Cap Fund",
+      "disclosure_month": "2026-06",
+      "expected_file": "data/raw/amc/<adapter>/2026-06.<source-extension>",
+      "reason": "No official monthly portfolio file for this scheme-month is present in data/raw."
+    }
+  ],
+  "note": "No holdings, identifiers or values were inferred for missing files."
+}

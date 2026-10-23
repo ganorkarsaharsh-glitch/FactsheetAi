@@ -1,0 +1,23 @@
+{
+  "registry_source": {
+    "name": "AMFI NAVAll.txt",
+    "path": "data/raw/amfi/nav.txt",
+    "retrieved_at": "2026-10-19",
+    "plan_policy": "Direct Plan; Growth or Growth Option"
+  },
+  "schemes": [
+    {"scheme_code": "120586", "name": "ICICI Prudential Large Cap Fund", "legacy_name": "ICICI Prudential Bluechip Fund", "role": "requested", "source_available": false},
+    {"scheme_code": "119018", "name": "HDFC Large Cap Fund", "legacy_name": "HDFC Top 100 Fund", "role": "requested", "adapter": "hdfc_xlsx", "source_available": true},
+    {"scheme_code": "119598", "name": "SBI Large Cap Fund", "legacy_name": "SBI Bluechip Fund", "role": "requested", "adapter": "sbi_xlsx", "source_available": true},
+    {"scheme_code": "118632", "name": "Nippon India Large Cap Fund", "role": "requested", "adapter": "nippon_xls", "source_available": true},
+    {"scheme_code": "120152", "name": "Kotak Large Cap Fund", "role": "reserve", "source_available": false},
+    {"scheme_code": "120465", "name": "Axis Large Cap Fund", "role": "reserve", "source_available": false},
+    {"scheme_code": "118825", "name": "Mirae Asset Large Cap Fund", "role": "reserve", "source_available": false},
+    {"scheme_code": "119250", "name": "DSP Large Cap Fund", "role": "peer", "source_available": false},
+    {"scheme_code": "120656", "name": "UTI - Large Cap Fund", "role": "peer", "source_available": false},
+    {"scheme_code": "119528", "name": "Aditya Birla Sun Life Large Cap Fund", "role": "peer", "source_available": false},
+    {"scheme_code": "119160", "name": "Tata Large Cap Fund", "role": "peer", "adapter": "tata_xlsx", "source_available": true},
+    {"scheme_code": "118531", "name": "Franklin India Large Cap Fund", "role": "peer", "source_available": false},
+    {"scheme_code": "119063", "name": "HDFC Nifty 50 Index Fund", "role": "benchmark_control", "adapter": "hdfc_xlsx", "source_available": true}
+  ]
+}

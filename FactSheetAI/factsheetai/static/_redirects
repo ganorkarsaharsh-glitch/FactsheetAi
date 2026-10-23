@@ -1,0 +1,6 @@
+/ /landing.html 200
+/dashboard /index.html 200
+/terminal /index.html 200
+/app /index.html 200
+/overview /landing.html 200
+/static/* /:splat 200

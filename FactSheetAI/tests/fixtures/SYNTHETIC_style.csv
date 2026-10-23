@@ -1,0 +1,4 @@
+scheme_id,scheme_name,disclosure_month,isin,security_name,weight_pct,asset_type,amc
+C,Synthetic C,2025-01-01,INE000A01001,Fixture One,80,equity,TEST ONLY
+C,Synthetic C,2025-01-01,INE000A01002,Fixture Two,15,equity,TEST ONLY
+C,Synthetic C,2025-01-01,INE000A01003,Fixture Cash,5,cash,TEST ONLY

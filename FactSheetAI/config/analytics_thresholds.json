@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "amber_margin_pct": 15,
+  "rules": {
+    "HIGH_PAIR_OVERLAP": {"label": "High pair overlap", "threshold": 50, "moderate_threshold": 30, "direction": "above", "inclusive": true, "penalty": 15, "unit": "%"},
+    "CLOSET_INDEXING": {"label": "Low active share", "threshold": 50, "direction": "below", "penalty": 15, "unit": "%"},
+    "MANDATE_BREACH": {"label": "Large-cap mandate floor", "threshold": 80, "direction": "below", "penalty": 20, "unit": "%"},
+    "SINGLE_STOCK_CONCENTRATION": {"label": "Single-stock concentration", "threshold": 10, "direction": "above", "penalty": 15, "unit": "%"},
+    "TOP10_CONCENTRATION": {"label": "Top-10 concentration", "threshold": 50, "direction": "above", "penalty": 10, "unit": "%"},
+    "SECTOR_CROWDING": {"label": "Sector crowding", "threshold": 35, "direction": "above", "penalty": 10, "unit": "%"},
+    "FEW_EFFECTIVE_STOCKS": {"label": "Few effective stocks", "threshold": 20, "direction": "below", "penalty": 10, "unit": "stocks"},
+    "HEAVY_RESHUFFLING": {"label": "Portfolio reshuffling", "threshold": 30, "direction": "above", "penalty": 10, "unit": "%"},
+    "EXPENSE_ABOVE_CATEGORY": {"label": "Expense above category average", "threshold": 0, "direction": "above", "penalty": 5, "unit": "percentage points"},
+    "CASH_DRAG": {"label": "Cash allocation", "threshold": 10, "direction": "above", "penalty": 5, "unit": "%"},
+    "HIGH_TURNOVER": {"label": "High turnover", "threshold": 100, "direction": "above", "penalty": 5, "unit": "%"}
+  }
+}

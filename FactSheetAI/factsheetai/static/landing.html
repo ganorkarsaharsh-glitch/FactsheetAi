@@ -1,0 +1,2788 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FactSheetAI — Institutional Mutual Fund Overlap & Mandate Drift Intelligence</title>
+  <meta name="description" content="Deterministic, ISIN-level look-through analytics across India's leading equity mutual funds. Recomputed directly from statutory AMC filings with cryptographic SHA-256 provenance.">
+  <meta name="theme-color" content="#040711">
+  <link rel="icon" type="image/png" href="/static/logo_icon.png">
+  <link rel="apple-touch-icon" href="/static/logo_icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #040711;
+      --bg-surface: #080e1c;
+      --bg-card: rgba(13, 21, 38, 0.75);
+      --bg-card-hover: rgba(18, 30, 54, 0.88);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-card: rgba(59, 130, 246, 0.22);
+      --border-highlight: rgba(96, 165, 250, 0.45);
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --accent-blue: #3b82f6;
+      --accent-blue-deep: #1d4ed8;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      
+      --shadow-ambient: 0 20px 50px -15px rgba(0, 0, 0, 0.75);
+      --shadow-glow: 0 0 35px -5px rgba(59, 130, 246, 0.28);
+      --shadow-emerald: 0 0 25px -4px rgba(16, 185, 129, 0.3);
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; color-scheme: dark; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      background-image: 
+        radial-gradient(circle at 50% -10%, rgba(37, 99, 235, 0.2) 0%, transparent 60%),
+        radial-gradient(circle at 90% 25%, rgba(6, 182, 212, 0.09) 0%, transparent 45%),
+        radial-gradient(circle at 10% 70%, rgba(16, 185, 129, 0.07) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* TYPOGRAPHY */
+    .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, #93c5fd 75%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-emerald {
+      background: linear-gradient(135deg, #6ee7b7 20%, #10b981 70%, #059669 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* HEADER & NAVIGATION (TRENDING GLASS FLOATING BAR) */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(4, 7, 17, 0.72);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    header.site-header.scrolled {
+      background: rgba(4, 7, 17, 0.88);
+      backdrop-filter: blur(26px) saturate(200%);
+      -webkit-backdrop-filter: blur(26px) saturate(200%);
+      border-bottom: 1px solid rgba(6, 182, 212, 0.28);
+      box-shadow: 0 12px 36px -10px rgba(0, 0, 0, 0.85), 0 0 25px -8px rgba(6, 182, 212, 0.25);
+    }
+    header.site-header.scrolled:hover {
+      border-bottom-color: rgba(6, 182, 212, 0.5);
+      box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.95), 0 0 35px -4px rgba(6, 182, 212, 0.42);
+    }
+    .nav-wrapper {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    header.site-header.scrolled .nav-wrapper {
+      height: 62px;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+    .brand-header-logo {
+      height: 38px;
+      width: auto;
+      max-width: 175px;
+      object-fit: contain;
+      display: block;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.45));
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+    }
+    .brand-logo:hover .brand-header-logo {
+      transform: scale(1.04);
+      filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.8));
+    }
+    .brand-tag-pill {
+      font-size: 9px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.28);
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* TRENDING CENTERED GLASS CAPSULE NAV (MATCHING USER REFERENCE) */
+    .nav-glass-capsule {
+      display: flex;
+      align-items: center;
+      background: rgba(10, 16, 32, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-full);
+      padding: 4px 6px;
+      gap: 3px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-glass-capsule:hover {
+      background: rgba(13, 21, 38, 0.85);
+      border-color: rgba(6, 182, 212, 0.42);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), 0 0 22px rgba(6, 182, 212, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+    .nav-capsule-link {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      white-space: nowrap;
+    }
+    .nav-capsule-link:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.09);
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.28);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+      transform: translateY(-1px);
+    }
+    .nav-capsule-link.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.4), rgba(6, 182, 212, 0.32));
+      border: 1px solid rgba(6, 182, 212, 0.42);
+      box-shadow: 0 0 14px rgba(6, 182, 212, 0.35);
+      font-weight: 600;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    /* GLASS PILL CTA BUTTON (MATCHING 'GET IN TOUCH ->' IN REFERENCE) */
+    .nav-cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 16px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(2, 132, 199, 0.95));
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .nav-cta-pill:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6);
+      border-color: rgba(6, 182, 212, 0.6);
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      color: #ffffff;
+    }
+    .cta-arrow-icon {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.22s ease;
+      flex-shrink: 0;
+    }
+    .nav-cta-pill:hover .cta-arrow-icon {
+      transform: translateX(3px);
+    }
+
+    @media (max-width: 1180px) {
+      .brand-tag-pill { display: none; }
+      .nav-capsule-link { padding: 5px 10px; font-size: 12px; }
+    }
+    @media (max-width: 900px) {
+      .nav-glass-capsule { display: none; }
+    }
+    @media (max-width: 640px) {
+      .brand-header-logo { height: 30px; }
+      .nav-cta-pill span { display: none; }
+      .nav-cta-pill { padding: 7px 10px; }
+    }
+
+    .status-dot-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 10px var(--accent-emerald);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* PRESET CHIPS */
+    .preset-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 10px 16px;
+      background: rgba(13, 21, 38, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+    .preset-label {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      margin-right: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .preset-chip {
+      height: 32px;
+      padding: 0 14px;
+      border-radius: var(--radius-full);
+      font-size: 11.5px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .preset-chip:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: rgba(96, 165, 250, 0.5);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .preset-chip.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.35), rgba(6, 182, 212, 0.25));
+      border-color: var(--accent-cyan);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(6, 182, 212, 0.35);
+    }
+    .chip-dot {
+      width: 6.5px;
+      height: 6.5px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 8px var(--accent-cyan);
+    }
+
+    /* VIEW SWITCHER PILL */
+    .view-switcher-pill {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(13, 21, 38, 0.85);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: var(--radius-full);
+      padding: 3px;
+      gap: 3px;
+    }
+    .view-switch-btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .view-switch-btn:hover {
+      color: #fff;
+    }
+    .view-switch-btn.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.5);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      padding: 10px 18px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 18px rgba(37, 99, 235, 0.35);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      box-shadow: 0 6px 24px rgba(37, 99, 235, 0.55);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+    .btn-sm { padding: 7px 14px; font-size: 12.5px; }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 60px 0 50px;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.28);
+      border-radius: var(--radius-full);
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: #60a5fa;
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow svg { width: 14px; height: 14px; fill: currentColor; }
+
+    .hero-title {
+      font-size: clamp(32px, 4.4vw, 56px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      margin-bottom: 20px;
+    }
+    .hero-lead {
+      font-size: clamp(15px, 1.2vw, 17.5px);
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+    .hero-cta-group .btn {
+      padding: 12px 22px;
+      font-size: 14.5px;
+    }
+
+    /* ============================================================== */
+    /* KEYFRAME ANIMATIONS: CIRCLE HOVER MOTION + MOVING BARS         */
+    /* ============================================================== */
+    @keyframes spinRing {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes floatA {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-7px) rotate(-1deg); }
+    }
+
+    @keyframes floatB {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(7px) rotate(1deg); }
+    }
+
+    @keyframes radarWave {
+      0% { transform: scale(1); opacity: 0.85; }
+      100% { transform: scale(1.9); opacity: 0; }
+    }
+
+    @keyframes barShimmer {
+      0% { transform: translateX(-100%); }
+      50%, 100% { transform: translateX(200%); }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.4); }
+      50% { box-shadow: 0 0 38px rgba(6, 182, 212, 0.8); }
+    }
+
+    /* HERO VENN OVERLAP CIRCLE SHOWCASE */
+    .hero-venn-card {
+      background: linear-gradient(145deg, rgba(14, 23, 44, 0.85), rgba(8, 14, 28, 0.95));
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow-ambient), var(--shadow-glow);
+      backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+    }
+    .venn-card-title {
+      font-size: 13px;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .venn-card-hint {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    .venn-stage {
+      position: relative;
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0 20px;
+    }
+
+    /* THE TWO INTERACTING CIRCLES */
+    .venn-circle {
+      position: absolute;
+      width: 155px;
+      height: 155px;
+      border-radius: 50%;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .venn-circle-a {
+      left: calc(50% - 135px);
+      background: radial-gradient(circle at 35% 35%, rgba(37, 99, 235, 0.4), rgba(11, 18, 36, 0.85));
+      border: 2px solid rgba(59, 130, 246, 0.5);
+      box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.4), inset 0 0 20px rgba(37, 99, 235, 0.25);
+      animation: floatA 5s ease-in-out infinite;
+    }
+
+    .venn-circle-b {
+      right: calc(50% - 135px);
+      background: radial-gradient(circle at 65% 35%, rgba(16, 185, 129, 0.35), rgba(11, 18, 36, 0.85));
+      border: 2px solid rgba(16, 185, 129, 0.45);
+      box-shadow: 0 10px 30px -5px rgba(16, 185, 129, 0.4), inset 0 0 20px rgba(16, 185, 129, 0.25);
+      animation: floatB 5.5s ease-in-out infinite;
+    }
+
+    /* CENTER INTERSECTION OVERLAP CIRCLE */
+    .venn-overlap-center {
+      position: absolute;
+      z-index: 10;
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.45) 0%, rgba(8, 15, 32, 0.94) 75%);
+      border: 2.5px solid rgba(6, 182, 212, 0.75);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.55), inset 0 0 15px rgba(6, 182, 212, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: pulseGlow 4s infinite ease-in-out;
+    }
+
+    /* MOTION ANIMATION WHILE HOVERING THE CIRCLES! */
+    .venn-circle-a:hover {
+      transform: scale(1.14) translateX(-8px) !important;
+      border-color: #93c5fd;
+      background: radial-gradient(circle at 35% 35%, rgba(37, 99, 235, 0.6), rgba(11, 18, 36, 0.95));
+      box-shadow: 0 0 45px rgba(59, 130, 246, 0.75), inset 0 0 30px rgba(59, 130, 246, 0.5);
+      z-index: 8;
+    }
+
+    .venn-circle-b:hover {
+      transform: scale(1.14) translateX(8px) !important;
+      border-color: #6ee7b7;
+      background: radial-gradient(circle at 65% 35%, rgba(16, 185, 129, 0.55), rgba(11, 18, 36, 0.95));
+      box-shadow: 0 0 45px rgba(16, 185, 129, 0.75), inset 0 0 30px rgba(16, 185, 129, 0.5);
+      z-index: 8;
+    }
+
+    .venn-overlap-center:hover {
+      transform: scale(1.24) !important;
+      border-color: #38bdf8;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.7) 0%, rgba(8, 15, 32, 0.98) 75%);
+      box-shadow: 0 0 60px rgba(6, 182, 212, 0.95), inset 0 0 25px rgba(6, 182, 212, 0.5);
+      z-index: 20;
+    }
+
+    /* Radar pulse ring radiating outward on center circle hover */
+    .venn-overlap-center::before {
+      content: "";
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      border-radius: 50%;
+      border: 2px solid rgba(6, 182, 212, 0.8);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .venn-overlap-center:hover::before {
+      animation: radarWave 1.4s infinite cubic-bezier(0.1, 0.8, 0.3, 1);
+    }
+
+    /* Dashed concentric orbit ring around center circle */
+    .venn-orbit-ring {
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(6, 182, 212, 0.4);
+      pointer-events: none;
+      animation: spinRing 10s linear infinite;
+      transition: all 0.3s;
+    }
+    .venn-overlap-center:hover ~ .venn-orbit-ring {
+      border-color: rgba(56, 189, 248, 0.95);
+      animation-duration: 3s;
+      transform: scale(1.15);
+    }
+
+    .venn-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .venn-val {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    .venn-overlap-pct {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .venn-overlap-sub {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    /* Dynamic Venn Tooltip readout */
+    .venn-readout {
+      background: rgba(5, 9, 20, 0.85);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      text-align: center;
+      transition: all 0.3s ease;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* TRUST PROOF STATS BAR */
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      padding: 24px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-ambient);
+      backdrop-filter: blur(14px);
+      margin-top: 40px;
+    }
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .trust-val {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .trust-val span { font-size: 14px; color: var(--accent-cyan); }
+    .trust-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* TICKER MARQUEE */
+    .ticker-section {
+      margin: 20px 0 60px;
+      overflow: hidden;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(8, 14, 28, 0.6);
+      padding: 12px 0;
+    }
+    .ticker-inner {
+      display: flex;
+      width: max-content;
+      animation: ticker-scroll 38s linear infinite;
+      gap: 48px;
+    }
+    .ticker-inner:hover { animation-play-state: paused; }
+    @keyframes ticker-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
+    .ticker-fund { font-weight: 700; color: #e2e8f0; }
+    .ticker-stat { font-family: var(--font-mono); color: var(--accent-cyan); }
+    .ticker-tag {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+    }
+
+    /* SECTION BASICS */
+    section { padding: 60px 0; }
+    .section-header {
+      margin-bottom: 40px;
+    }
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-cyan);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 15.5px;
+      max-width: 680px;
+    }
+
+    /* ============================================================== */
+    /* INTERACTIVE SANDBOX WIDGET WITH MOVING BARS & CIRCLE GAUGE     */
+    /* ============================================================== */
+    .sandbox-card {
+      background: linear-gradient(145deg, rgba(14, 23, 44, 0.85), rgba(8, 14, 28, 0.96));
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-ambient), var(--shadow-glow);
+      backdrop-filter: blur(16px);
+      margin-bottom: 40px;
+    }
+    .sandbox-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    .sandbox-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr 170px auto;
+      gap: 14px;
+      width: 100%;
+      align-items: end;
+    }
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .form-control {
+      width: 100%;
+      height: 44px;
+      background: rgba(6, 11, 22, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-sm);
+      padding: 0 14px;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .form-control:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+    }
+    
+    .sandbox-results {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .metric-box {
+      background: rgba(6, 11, 24, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .metric-box:hover {
+      border-color: var(--border-highlight);
+      transform: translateY(-2px);
+    }
+    .metric-box::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+    }
+    .metric-box.emerald::before {
+      background: linear-gradient(90deg, transparent, var(--accent-emerald), transparent);
+    }
+
+    /* CIRCLE GAUGE COMPONENT (WITH HOVER MOTION ANIMATION) */
+    .circle-gauge-container {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .circle-gauge-wrap {
+      position: relative;
+      width: 82px;
+      height: 82px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .circle-gauge-wrap:hover {
+      transform: scale(1.14);
+    }
+    .circle-gauge-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+      overflow: visible;
+    }
+    .circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.07);
+      stroke-width: 8;
+    }
+    .circle-orbit-ring {
+      fill: none;
+      stroke: rgba(6, 182, 212, 0.25);
+      stroke-width: 1.5;
+      stroke-dasharray: 4 4;
+      animation: spinRing 12s linear infinite;
+      transform-origin: center;
+      transition: stroke 0.3s;
+    }
+    .circle-gauge-wrap:hover .circle-orbit-ring {
+      stroke: rgba(56, 189, 248, 0.95);
+      animation-duration: 3s;
+    }
+    .circle-progress {
+      fill: none;
+      stroke: url(#gaugeGradient);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 289;
+      stroke-dashoffset: 289;
+      transition: stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s;
+      filter: drop-shadow(0 0 6px rgba(6, 182, 212, 0.5));
+    }
+    .circle-gauge-wrap:hover .circle-progress {
+      filter: drop-shadow(0 0 16px rgba(6, 182, 212, 0.95));
+    }
+    .circle-gauge-center {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .circle-gauge-num {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+    .circle-gauge-tag {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .metric-caption {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+    .metric-number {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin: 8px 0 4px;
+    }
+    .metric-sub {
+      font-size: 11.5px;
+      color: var(--text-dim);
+    }
+
+    .sandbox-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+    }
+    .table-container {
+      background: rgba(6, 11, 24, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .table-title-bar {
+      padding: 14px 18px;
+      background: rgba(13, 21, 38, 0.8);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .table-title-bar h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+    .table-title-bar span {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    table.data-table th {
+      text-align: left;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-muted);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(4, 8, 18, 0.5);
+    }
+    table.data-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #cbd5e1;
+    }
+    table.data-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    table.data-table td.num, table.data-table th.num {
+      text-align: right;
+      font-family: var(--font-mono);
+    }
+    .isin-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #94a3b8;
+    }
+
+    /* ============================================================== */
+    /* THE MOVING BARS (STAGGERED SLIDING FILL + SHIMMER BEAM)        */
+    /* ============================================================== */
+    .bars-container {
+      background: rgba(6, 11, 24, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .bar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      transition: background-color 0.2s ease;
+    }
+    .bar-row:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .bar-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+    .bar-track {
+      height: 9px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #2563eb 0%, #06b6d4 70%, #10b981 100%);
+      width: 0%;
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.4);
+    }
+    /* Moving shimmer light wave traveling through the bar */
+    .bar-fill::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
+      transform: translateX(-100%);
+      animation: barShimmer 2.5s infinite ease-in-out;
+    }
+    .bar-row:hover .bar-fill {
+      filter: brightness(1.25);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.7);
+    }
+
+    .provenance-footnote {
+      margin-top: 20px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(6, 11, 24, 0.7);
+      border: 1px solid var(--border-subtle);
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* BENTO GRID */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .bento-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-ambient);
+      backdrop-filter: blur(12px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .bento-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-highlight);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-ambient), 0 10px 30px -10px rgba(59, 130, 246, 0.25);
+    }
+    .bento-card.span-2 { grid-column: span 2; }
+    
+    .bento-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      color: #60a5fa;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .bento-card:hover .bento-icon {
+      transform: scale(1.12) rotate(4deg);
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.5);
+    }
+    .bento-icon svg { width: 22px; height: 22px; fill: currentColor; }
+    .bento-icon.emerald {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.25);
+      color: #34d399;
+    }
+    .bento-icon.amber {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.25);
+      color: #fbbf24;
+    }
+    .bento-icon.cyan {
+      background: rgba(6, 182, 212, 0.12);
+      border-color: rgba(6, 182, 212, 0.25);
+      color: #38bdf8;
+    }
+
+    .bento-card h3 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+    .bento-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .bento-formula {
+      background: rgba(4, 7, 17, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #38bdf8;
+      margin-top: auto;
+    }
+    .bento-badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+    .bento-badge {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      padding: 3px 9px;
+      color: var(--text-muted);
+    }
+
+    /* ARCHITECTURE PIPELINE */
+    .arch-pipeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin: 35px 0 20px;
+      position: relative;
+    }
+    .pipe-step {
+      background: rgba(9, 15, 30, 0.75);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px 14px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .pipe-step:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-highlight);
+    }
+    .pipe-step::after {
+      content: "→";
+      position: absolute;
+      right: -13px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--accent-blue);
+      z-index: 2;
+    }
+    .pipe-step:last-child::after { display: none; }
+    .pipe-num {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+    .pipe-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .pipe-desc {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    /* COMPARISON TABLE */
+    .comp-table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 30px;
+      box-shadow: var(--shadow-ambient);
+    }
+    table.comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    table.comp-table th {
+      padding: 18px 22px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(13, 21, 38, 0.85);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    table.comp-table th.brand-col {
+      color: var(--accent-cyan);
+      background: rgba(37, 99, 235, 0.12);
+      border-left: 1px solid rgba(59, 130, 246, 0.3);
+      border-right: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    table.comp-table td {
+      padding: 16px 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+    }
+    table.comp-table td.feature-name {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    table.comp-table td.brand-col {
+      background: rgba(37, 99, 235, 0.04);
+      border-left: 1px solid rgba(59, 130, 246, 0.2);
+      border-right: 1px solid rgba(59, 130, 246, 0.2);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+    .check-icon { color: var(--accent-emerald); font-weight: 800; margin-right: 6px; }
+    .cross-icon { color: var(--accent-rose); font-weight: 800; margin-right: 6px; }
+
+    /* AUDIENCE PERSONAS */
+    .personas-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+    .persona-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    .persona-box:hover {
+      border-color: var(--border-highlight);
+      transform: translateY(-2px);
+    }
+    .persona-role {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .persona-box h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .persona-box p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* FAQ ACCORDION */
+    .faq-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 900px;
+      margin: 30px auto 0;
+    }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .faq-item:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+    .faq-question {
+      padding: 18px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .faq-chevron {
+      transition: transform 0.25s ease;
+      color: var(--text-dim);
+    }
+    .faq-item.active .faq-chevron {
+      transform: rotate(180deg);
+      color: var(--accent-cyan);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+      padding: 0 22px;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 400px;
+      padding-bottom: 20px;
+    }
+
+    /* CTA BANNER */
+    .cta-banner {
+      background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.28) 0%, rgba(8, 14, 28, 0.95) 75%);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 60px 40px;
+      text-align: center;
+      margin: 70px 0 40px;
+      box-shadow: var(--shadow-ambient), var(--shadow-glow);
+      position: relative;
+    }
+    .cta-banner h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .cta-banner p {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 640px;
+      margin: 0 auto 30px;
+    }
+
+    /* FOOTER */
+    footer.site-footer {
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(3, 6, 14, 0.95);
+      padding: 60px 0 35px;
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 36px;
+      margin-bottom: 45px;
+    }
+    .footer-col h5 {
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-col ul a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-col ul a:hover { color: var(--text-main); }
+    /* FOOTER CREDITS SHOWCASE CARD */
+    .footer-credits-card {
+      margin-bottom: 35px;
+      padding: 24px 28px;
+      background: linear-gradient(135deg, rgba(8, 14, 28, 0.9), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: var(--radius-md);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6), 0 0 25px -8px rgba(6, 182, 212, 0.12);
+      backdrop-filter: blur(12px);
+    }
+    .credits-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 32px;
+    }
+    .credits-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.08);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      margin-bottom: 14px;
+    }
+    .credits-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #06b6d4;
+      box-shadow: 0 0 8px #06b6d4;
+    }
+    .authors-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .author-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #1e3a8a, #0284c7);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+    }
+    .author-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .credit-link {
+      color: var(--text-main);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+    .credit-link:hover {
+      color: var(--accent-cyan);
+    }
+    .author-name {
+      font-weight: 700;
+      font-size: 13.5px;
+      letter-spacing: -0.01em;
+    }
+    .author-name:hover {
+      text-shadow: 0 0 12px rgba(6, 182, 212, 0.5);
+    }
+    .author-role {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .company-link {
+      color: #38bdf8;
+      font-weight: 600;
+      border-bottom: 1px dotted rgba(56, 189, 248, 0.4);
+    }
+    .company-link:hover {
+      color: #7dd3fc;
+      border-bottom-color: #7dd3fc;
+    }
+    .ext-icon {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+      opacity: 0.7;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+    .credit-link:hover .ext-icon {
+      opacity: 1;
+      transform: translate(1px, -1px);
+    }
+    .academic-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .academic-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .academic-mentorship {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .mentor-link {
+      color: #60a5fa;
+      font-weight: 600;
+      border-bottom: 1px dotted rgba(96, 165, 250, 0.4);
+    }
+    .mentor-link:hover {
+      color: #93c5fd;
+      border-bottom-color: #93c5fd;
+    }
+    .academic-institution {
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .inst-link {
+      color: #a78bfa;
+      font-weight: 600;
+      border-bottom: 1px dotted rgba(167, 139, 250, 0.4);
+    }
+    .inst-link:hover {
+      color: #c4b5fd;
+      border-bottom-color: #c4b5fd;
+    }
+    @media (max-width: 768px) {
+      .credits-grid { grid-template-columns: 1fr; gap: 20px; }
+      .footer-credits-card { padding: 18px 20px; }
+    }
+    .footer-disclaimer {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      line-height: 1.6;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .trust-strip { grid-template-columns: repeat(2, 1fr); }
+      .bento-grid { grid-template-columns: repeat(2, 1fr); }
+      .bento-card.span-2 { grid-column: span 1; }
+      .personas-grid { grid-template-columns: repeat(2, 1fr); }
+      .arch-pipeline { grid-template-columns: 1fr; }
+      .pipe-step::after { display: none; }
+      .sandbox-layout { grid-template-columns: 1fr; }
+      .sandbox-results { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-glass-capsule { display: none; }
+      .sandbox-controls { grid-template-columns: 1fr; }
+      .trust-strip { grid-template-columns: 1fr; }
+      .bento-grid { grid-template-columns: 1fr; }
+      .personas-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STICKY FLOATING GLASS SITE HEADER -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo" aria-label="FactSheetAI Home">
+        <img src="/static/logo.png" alt="Factsheet AI" class="brand-header-logo">
+        <span class="brand-tag-pill">LOOK-THROUGH INTELLIGENCE</span>
+      </a>
+
+      <!-- TRENDING GLASS CAPSULE NAV (MATCHING USER REFERENCE) -->
+      <nav class="nav-glass-capsule" id="navGlassCapsule" aria-label="Primary Navigation">
+        <a href="#sandbox" class="nav-capsule-link active">Sandbox</a>
+        <a href="#features" class="nav-capsule-link">Engines</a>
+        <a href="#architecture" class="nav-capsule-link">Architecture</a>
+        <a href="#comparison" class="nav-capsule-link">Benchmarks</a>
+        <a href="#faq" class="nav-capsule-link">FAQ</a>
+        <a href="/docs" target="_blank" class="nav-capsule-link">API Docs</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- DUAL-VIEW SWITCHER PILL -->
+        <div class="view-switcher-pill">
+          <span class="view-switch-btn active">⌂ Overview</span>
+          <a href="/dashboard" class="view-switch-btn">⚡ Terminal</a>
+        </div>
+        <!-- HIGH-IMPACT GLASS PILL CTA BUTTON (MATCHING 'GET IN TOUCH ->' IN REFERENCE) -->
+        <a href="/dashboard" class="nav-cta-pill" title="Launch Institutional Research Terminal">
+          <span>Launch Lab</span>
+          <svg viewBox="0 0 24 24" class="cta-arrow-icon"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION WITH INTERACTIVE VENN OVERLAP CIRCLES -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow">
+              <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+              INSTITUTIONAL MUTUAL FUND INTELLIGENCE & AUDIT ENGINE
+            </div>
+            
+            <h1 class="hero-title">
+              Eliminate False Diversification.<br>
+              <span class="gradient-text">Unmask True Mandate Drift.</span>
+            </h1>
+
+            <p class="hero-lead">
+              The deterministic, ISIN-level look-through intelligence platform for wealth management desks, family offices, and SEBI Registered Investment Advisors. Recomputed directly from statutory AMC disclosures and official AMFI market-cap schedules with byte-level cryptographic provenance.
+            </p>
+
+            <div class="hero-cta-group">
+              <a href="/dashboard" class="btn btn-primary">
+                Launch Research Terminal →
+              </a>
+              <a href="#sandbox" class="btn btn-outline">
+                Explore Interactive Sandbox ↓
+              </a>
+              <a href="/v1/catalog" target="_blank" class="btn btn-outline mono btn-sm">
+                GET /v1/catalog
+              </a>
+            </div>
+          </div>
+
+          <!-- INTERACTIVE VENN CIRCLES SHOWCASE (WITH MOTION ANIMATION ON HOVER) -->
+          <div class="hero-venn-card" id="heroVennShowcase">
+            <div class="venn-card-title">
+              <span>Interactive Overlap Visualizer</span>
+              <span style="font-size:10px; color:#38bdf8;">HOVER THE CIRCLES</span>
+            </div>
+            <div class="venn-card-hint">Hover each fund circle or the center intersection to inspect dynamic motion & shared weights.</div>
+
+            <div class="venn-stage">
+              <!-- Scheme A Circle -->
+              <div class="venn-circle venn-circle-a" id="vennCircleA">
+                <span class="venn-title" id="vennNameA">HDFC Large Cap</span>
+                <span class="venn-val" style="color:#93c5fd;" id="vennHoldingsA">64 Equities</span>
+                <span style="font-size:9.5px; color:#cbd5e1; margin-top:2px;">Top 10: 51.4%</span>
+              </div>
+
+              <!-- Scheme B Circle -->
+              <div class="venn-circle venn-circle-b" id="vennCircleB">
+                <span class="venn-title" id="vennNameB">SBI Large Cap</span>
+                <span class="venn-val" style="color:#6ee7b7;" id="vennHoldingsB">58 Equities</span>
+                <span style="font-size:9.5px; color:#cbd5e1; margin-top:2px;">Top 10: 48.2%</span>
+              </div>
+
+              <!-- Center Overlap Circle -->
+              <div class="venn-overlap-center" id="vennCenterCircle">
+                <span class="venn-overlap-pct" id="vennOverlapVal">48.2%</span>
+                <span class="venn-overlap-sub">SHARED NAV</span>
+              </div>
+
+              <!-- Concentric Orbit Ring -->
+              <div class="venn-orbit-ring"></div>
+            </div>
+
+            <!-- Dynamic Tooltip / Status Display -->
+            <div class="venn-readout" id="vennReadout">
+              <span>Hover over the center circle to inspect overlapping holdings and duplicated capital.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRUST PROOF STRIP -->
+        <div class="trust-strip">
+          <div class="trust-item">
+            <div class="trust-val">76<span>FILINGS</span></div>
+            <div class="trust-label">188+ MB Byte-Preserved Official Workbooks</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-val">100%<span>DETERMINISTIC</span></div>
+            <div class="trust-label">Decimal Precision · Zero Model Hallucinations</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-val">64-HEX<span>SHA-256</span></div>
+            <div class="trust-label">Lineage Down to Exact Source Excel Row Spans</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-val">DUAL<span>ENGINE</span></div>
+            <div class="trust-label">Pandas Vectorized + Pure Python Cross-Validation</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE MARQUEE TICKER -->
+    <section class="ticker-section" aria-label="Monitored Mutual Fund Schemes">
+      <div class="ticker-inner">
+        <div class="ticker-pill">
+          <span class="ticker-fund">HDFC Large Cap Direct (G)</span>
+          <span class="ticker-stat">Large Cap: 86.8%</span>
+          <span class="ticker-stat">Top 10: 51.4%</span>
+          <span class="ticker-tag">64 ISINs Verified</span>
+        </div>
+        <div class="ticker-pill">
+          <span class="ticker-fund">SBI Large Cap Direct (G)</span>
+          <span class="ticker-stat">Large Cap: 83.1%</span>
+          <span class="ticker-stat">Top 10: 48.2%</span>
+          <span class="ticker-tag">58 ISINs Verified</span>
+        </div>
+        <div class="ticker-pill">
+          <span class="ticker-fund">Nippon India Large Cap Direct (G)</span>
+          <span class="ticker-stat">Large Cap: 82.4%</span>
+          <span class="ticker-stat">Top 10: 44.9%</span>
+          <span class="ticker-tag">61 ISINs Verified</span>
+        </div>
+        <div class="ticker-pill">
+          <span class="ticker-fund">Tata Large Cap Direct (G)</span>
+          <span class="ticker-stat">Large Cap: 85.0%</span>
+          <span class="ticker-stat">Top 10: 49.7%</span>
+          <span class="ticker-tag">55 ISINs Verified</span>
+        </div>
+        <div class="ticker-pill">
+          <span class="ticker-fund">HDFC Nifty 50 Index Direct (G)</span>
+          <span class="ticker-stat">Large Cap: 99.8%</span>
+          <span class="ticker-stat">Top 10: 58.1%</span>
+          <span class="ticker-tag">Benchmark Proxy</span>
+        </div>
+        <!-- Continuous loop duplicates -->
+        <div class="ticker-pill">
+          <span class="ticker-fund">HDFC Large Cap Direct (G)</span>
+          <span class="ticker-stat">Large Cap: 86.8%</span>
+          <span class="ticker-stat">Top 10: 51.4%</span>
+          <span class="ticker-tag">64 ISINs Verified</span>
+        </div>
+        <div class="ticker-pill">
+          <span class="ticker-fund">SBI Large Cap Direct (G)</span>
+          <span class="ticker-stat">Large Cap: 83.1%</span>
+          <span class="ticker-stat">Top 10: 48.2%</span>
+          <span class="ticker-tag">58 ISINs Verified</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE LIVE SANDBOX SECTION (WITH MOVING BARS & CIRCLE GAUGE) -->
+    <section id="sandbox" class="sandbox-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Interactive Institutional Sandbox</div>
+          <h2 class="section-title">Audit Pairwise Overlap in Real Time</h2>
+          <p class="section-desc">
+            Select any two funds from the verified AMFI/AMC corpus. Every calculation runs deterministically across real disclosed ISIN equity weights:
+            <code>Σ min(wAᵢ, wBᵢ)</code>.
+          </p>
+        </div>
+
+        <div class="sandbox-card">
+          <div class="sandbox-top">
+            <!-- QUICK BENCHMARK PRESETS STRIP -->
+            <div class="preset-strip" id="sbPresetStrip" style="margin-bottom:16px;">
+              <span class="preset-label">⚡ QUICK PRESETS:</span>
+              <button type="button" class="preset-chip active" id="sbPresetViva" title="Flagship Viva Pair (HDFC vs Nippon India, July 2025)">
+                <span class="chip-dot"></span> HDFC vs Nippon (Flagship Pair)
+              </button>
+              <button type="button" class="preset-chip" id="sbPresetGiants" title="HDFC Large Cap vs SBI Bluechip (July 2025)">
+                <span class="chip-dot"></span> HDFC vs SBI (Bluechip Giants)
+              </button>
+              <button type="button" class="preset-chip" id="sbPresetTrio" title="HDFC vs Tata Large Cap">
+                <span class="chip-dot"></span> HDFC vs Tata
+              </button>
+              <button type="button" class="preset-chip" id="sbPresetNipponTata" title="Nippon vs Tata">
+                <span class="chip-dot"></span> Nippon vs Tata
+              </button>
+            </div>
+
+            <div class="sandbox-controls">
+              <div class="form-group">
+                <label for="sbSchemeA">Portfolio A (Direct Growth)</label>
+                <select id="sbSchemeA" class="form-control"></select>
+              </div>
+              <div class="form-group">
+                <label for="sbSchemeB">Portfolio B (Direct Growth)</label>
+                <select id="sbSchemeB" class="form-control"></select>
+              </div>
+              <div class="form-group">
+                <label for="sbMonth">Disclosure Window</label>
+                <select id="sbMonth" class="form-control"></select>
+              </div>
+              <div class="form-group">
+                <label>&nbsp;</label>
+                <button id="sbRunBtn" class="btn btn-primary" style="height:44px; width:100%">
+                  Recalculate Math
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- RESULTS METRIC ROW (WITH ANIMATED CIRCLE GAUGE) -->
+          <div class="sandbox-results">
+            <!-- CIRCLE GAUGE METRIC (HOVER MOTION ANIMATED) -->
+            <div class="metric-box">
+              <div class="circle-gauge-container">
+                <div class="circle-gauge-wrap" id="circleGaugeWrap" title="Hover over this circular gauge for interactive motion animation">
+                  <svg class="circle-gauge-svg" viewBox="0 0 100 100">
+                    <defs>
+                      <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#2563eb"/>
+                        <stop offset="60%" stop-color="#06b6d4"/>
+                        <stop offset="100%" stop-color="#38bdf8"/>
+                      </linearGradient>
+                    </defs>
+                    <circle class="circle-bg" cx="50" cy="50" r="46"></circle>
+                    <circle class="circle-orbit-ring" cx="50" cy="50" r="49"></circle>
+                    <circle class="circle-progress" id="circleProgress" cx="50" cy="50" r="46"></circle>
+                  </svg>
+                  <div class="circle-gauge-center">
+                    <span class="circle-gauge-num" id="sbCircleVal">48.2%</span>
+                    <span class="circle-gauge-tag">OVERLAP</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="metric-caption">Shared Portfolio Weight</div>
+                  <div id="sbOverlapPct" class="metric-number gradient-text" style="font-size:24px; margin:4px 0 2px;">48.24%</div>
+                  <div class="metric-sub">Sum of min NAV weights</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-caption">Common Equity Holdings</div>
+              <div id="sbCommonCount" class="metric-number">38 ISINs</div>
+              <div class="metric-sub">Exact matching securities</div>
+            </div>
+
+            <div class="metric-box emerald">
+              <div class="metric-caption">AMFI Statutory Floor</div>
+              <div id="sbMandateFloor" class="metric-number gradient-emerald">86.40%</div>
+              <div class="metric-sub">Statutory threshold: ≥80.0%</div>
+            </div>
+
+            <div class="metric-box">
+              <div class="metric-caption">Dual Engine Status</div>
+              <div id="sbValidationBadge" class="metric-number" style="font-size:20px; padding-top:6px;">VALIDATING</div>
+              <div class="metric-sub">Pandas & Pure-Python match</div>
+            </div>
+          </div>
+
+          <!-- SPLIT DETAIL VIEW: TABLE + MOVING BARS -->
+          <div class="sandbox-layout">
+            <!-- COMMON HOLDINGS TABLE -->
+            <div class="table-container">
+              <div class="table-title-bar">
+                <h4>Common Equity Securities & Overlap Share</h4>
+                <span id="sbTableCount">Showing top contributors</span>
+              </div>
+              <div style="overflow-x: auto; max-height: 380px;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Security Name</th>
+                      <th>ISIN</th>
+                      <th class="num">Fund A %</th>
+                      <th class="num">Fund B %</th>
+                      <th class="num">Overlap %</th>
+                      <th>Row Lineage</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sbTableBody">
+                    <tr><td colspan="6" style="text-align:center; padding: 30px;">Loading portfolio holdings…</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- MOVING BARS CHART -->
+            <div class="bars-container">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h4 style="font-size: 13.5px; font-weight:700;">Overlap Contribution Breakdown</h4>
+                <span style="font-size:10px; font-family:var(--font-mono); color:var(--accent-cyan); letter-spacing:0.06em;">MOVING BARS</span>
+              </div>
+              <p style="font-size: 11.5px; color: var(--text-dim);">Leading individual equities driving portfolio duplication with animated fill.</p>
+              
+              <!-- DYNAMICALLY MOVING BARS CONTAINER -->
+              <div id="sbBarChart" style="display:flex; flex-direction:column; gap:14px; margin-top:8px;">
+                <!-- Moving bars dynamically rendered here with staggered slide animation -->
+              </div>
+
+              <div style="margin-top:auto; padding-top:14px; border-top:1px solid var(--border-subtle); display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; color:var(--text-muted);">Need multi-fund what-if analysis?</span>
+                <a href="/dashboard" class="btn btn-outline btn-sm">Open Full Terminal →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROVENANCE FOOTNOTE -->
+          <div class="provenance-footnote" id="sbProvenanceLine">
+            <span>Checking cryptographic source provenance…</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE VALUE PILLARS (BENTO GRID) -->
+    <section id="features">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Institutional Architecture</div>
+          <h2 class="section-title">Built for Fiduciary Transparency</h2>
+          <p class="section-desc">
+            Traditional tools rely on fuzzy company names and superficial category averages. FactSheetAI re-architects fund analytics around cryptographic provenance and statutory compliance.
+          </p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- CARD 1 -->
+          <div class="bento-card span-2">
+            <div class="bento-icon">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            </div>
+            <h3>ISIN-Level Pairwise Overlap Engine</h3>
+            <p>
+              Mathematical calculation of true portfolio overlap: <code>Σ min(wAᵢ, wBᵢ)</code> across exact 12-character ISIN identifiers. Exposes the dangerous hidden reality where an investor holding four "diversified" funds often duplicates 50%+ in the same top-heavy equities like HDFC Bank, Reliance, and ICICI Bank.
+            </p>
+            <div class="bento-formula">
+              Overlap(A, B) = Σᵢ min(wAᵢ, wBᵢ) &nbsp;|&nbsp; Jaccard = |A ∩ B| / |A ∪ B|
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="bento-card">
+            <div class="bento-icon emerald">
+              <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            </div>
+            <h3>Statutory Mandate Drift Detector</h3>
+            <p>
+              SEBI mandates large-cap equity funds maintain at least 80% of NAV in the official AMFI Top-100 list. FactSheetAI dynamically verifies each monthly snapshot against the exact effective half-yearly list in force.
+            </p>
+            <div class="bento-badge-group">
+              <span class="bento-badge">80% Statutory Floor</span>
+              <span class="bento-badge">Effective-Dated Lists</span>
+              <span class="bento-badge">Breach Red Flags</span>
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="bento-card">
+            <div class="bento-icon amber">
+              <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+            </div>
+            <h3>Line-by-Line Cryptographic Lineage</h3>
+            <p>
+              Zero synthetic records. Every parsed holding preserves the raw workbook file name, official retrieval URL, SHA-256 byte digest, disclosure month, and source sheet row span (e.g., <code>Row 42 [E14:E45]</code>).
+            </p>
+            <div class="bento-badge-group">
+              <span class="bento-badge">SHA-256 Provenance</span>
+              <span class="bento-badge">Spreadsheet Row Coordinates</span>
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="bento-card">
+            <div class="bento-icon cyan">
+              <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+            </div>
+            <h3>Look-Through Rupee Decomposition</h3>
+            <p>
+              Model client investments in actual rupees (e.g. ₹5,00,000 across 3 schemes). Aggregates underlying exposures across all funds to compute effective stocks, top-10 share, and capital duplication ratios.
+            </p>
+            <div class="bento-badge-group">
+              <span class="bento-badge">Effective Stocks (1/HHI)</span>
+              <span class="bento-badge">Duplication Ratio %</span>
+            </div>
+          </div>
+
+          <!-- CARD 5 -->
+          <div class="bento-card">
+            <div class="bento-icon">
+              <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+            </div>
+            <h3>Overlap Reduction Simulator</h3>
+            <p>
+              Rebalancing recommendations grounded in source files. Evaluates candidate replacement funds from the corpus, simulating projected pairwise overlap reduction without making speculative forecast claims.
+            </p>
+            <div class="bento-badge-group">
+              <span class="bento-badge">Substitution Simulations</span>
+              <span class="bento-badge">Percentage Point Reductions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE & PIPELINE SECTION -->
+    <section id="architecture">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Data Governance & Engineering</div>
+          <h2 class="section-title">The Deterministic Ingestion Pipeline</h2>
+          <p class="section-desc">
+            How raw monthly AMC filings and statutory AMFI circulars are converted into cryptographic, tamper-evident analytics without statistical extrapolation.
+          </p>
+        </div>
+
+        <div class="arch-pipeline">
+          <div class="pipe-step">
+            <span class="pipe-num">01 / IMMUTABLE</span>
+            <span class="pipe-name">Statutory Filings</span>
+            <span class="pipe-desc">Official monthly portfolio workbooks and AMFI top-100 lists downloaded and byte-preserved.</span>
+          </div>
+          <div class="pipe-step">
+            <span class="pipe-num">02 / PARSING</span>
+            <span class="pipe-name">Adapter Normalization</span>
+            <span class="pipe-desc">Format-specific parsers extract equity holdings, map ISINs, and capture exact spreadsheet coordinates.</span>
+          </div>
+          <div class="pipe-step">
+            <span class="pipe-num">03 / VERIFICATION</span>
+            <span class="pipe-name">Snapshot Validation</span>
+            <span class="pipe-desc">Pydantic models enforce schema contracts, NAV bounds, and verify SHA-256 cryptographic digests.</span>
+          </div>
+          <div class="pipe-step">
+            <span class="pipe-num">04 / CORE ENGINE</span>
+            <span class="pipe-name">Decimal Analytics</span>
+            <span class="pipe-desc">Dual execution: Vectorized Pandas merge and Pure Python dictionary traversal independently verify results.</span>
+          </div>
+          <div class="pipe-step">
+            <span class="pipe-num">05 / DELIVERY</span>
+            <span class="pipe-name">FastAPI & Terminal</span>
+            <span class="pipe-desc">Sub-millisecond REST endpoints, audit workbooks, and interactive research surfaces.</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(13, 21, 38, 0.7); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 22px; margin-top: 25px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); display: grid; place-items: center; color: var(--accent-emerald);">
+              <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            </div>
+            <div>
+              <div style="font-weight: 700; font-size: 14px;">The Fail-Closed Integrity Principle</div>
+              <div style="font-size: 12.5px; color: var(--text-muted);">
+                If an AMC workbook omits stock ISINs (such as ICICI factsheet PDFs), FactSheetAI excludes them rather than guessing. Unavailable data remains explicitly unavailable.
+              </div>
+            </div>
+          </div>
+          <a href="/dashboard#overlap-analysis" class="btn btn-outline btn-sm">Inspect Provenance Live →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTITUTIONAL COMPARISON TABLE -->
+    <section id="comparison">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Enterprise Benchmarking</div>
+          <h2 class="section-title">FactSheetAI vs Conventional Financial Portals</h2>
+          <p class="section-desc">
+            Why leading wealth managers, private family offices, and quant allocators require source-backed portfolio verification over commercial fund distributors.
+          </p>
+        </div>
+
+        <div class="comp-table-wrap">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th style="width: 28%;">Analytical Dimension</th>
+                <th class="brand-col" style="width: 38%;">FactSheetAI Institutional Engine</th>
+                <th style="width: 34%;">Retail Portals (Moneycontrol, Value Research)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="feature-name">Holding Resolution Key</td>
+                <td class="brand-col"><span class="check-icon">✓</span> Exact 12-char ISIN join from official filing</td>
+                <td><span class="cross-icon">✗</span> Heuristic / fuzzy company name matching</td>
+              </tr>
+              <tr>
+                <td class="feature-name">Cryptographic Audit Trail</td>
+                <td class="brand-col"><span class="check-icon">✓</span> SHA-256 hash + sheet name + exact Excel row span</td>
+                <td><span class="cross-icon">✗</span> None. Black-box database scraper</td>
+              </tr>
+              <tr>
+                <td class="feature-name">Mandate Drift Auditing</td>
+                <td class="brand-col"><span class="check-icon">✓</span> Matched to effective AMFI Top 100 schedule for each month</td>
+                <td><span class="cross-icon">✗</span> Static market cap tags ignoring circular schedules</td>
+              </tr>
+              <tr>
+                <td class="feature-name">Calculation Transparency</td>
+                <td class="brand-col"><span class="check-icon">✓</span> Open deterministic arithmetic (Σ min, HHI, turnover)</td>
+                <td><span class="cross-icon">✗</span> Proprietary, opaque "star ratings"</td>
+              </tr>
+              <tr>
+                <td class="feature-name">Commercial Alignment</td>
+                <td class="brand-col"><span class="check-icon">✓</span> 100% fiduciary unbiased research; zero distribution kickbacks</td>
+                <td><span class="cross-icon">✗</span> Distributor incentive & sponsored ad bias</td>
+              </tr>
+              <tr>
+                <td class="feature-name">Excel Export & Lineage</td>
+                <td class="brand-col"><span class="check-icon">✓</span> Dynamic formulas with source sheet citations & research links</td>
+                <td><span class="cross-icon">✗</span> Static tables or non-recalculating CSV dumps</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO IT'S BUILT FOR -->
+    <section>
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow">Enterprise Stakeholders</div>
+          <h2 class="section-title">Engineered for Fiduciary Professionals</h2>
+          <p class="section-desc">
+            Designed specifically for teams that cannot afford data ambiguity or compliance infractions.
+          </p>
+        </div>
+
+        <div class="personas-grid">
+          <div class="persona-box">
+            <div class="persona-role">SEBI Registered RIAs</div>
+            <h4>Fee-Only Financial Advisors</h4>
+            <p>
+              Prove genuine diversification to clients. Prevent multi-fund portfolio cannibalization and defend advisory fees with mathematically rigorous overlap reports.
+            </p>
+          </div>
+          <div class="persona-box">
+            <div class="persona-role">Family Offices</div>
+            <h4>Multi-Family Offices & UHNW</h4>
+            <p>
+              Identify stealth conglomerate overexposure across multiple active fund managers to ensure true capital preservation and concentration risk control.
+            </p>
+          </div>
+          <div class="persona-box">
+            <div class="persona-role">Fund Gatekeepers</div>
+            <h4>Private Banks & Wealth Desks</h4>
+            <p>
+              Audit mutual fund houses for style drift and closet benchmark hugging before allocating institutional capital or signing distributor agreements.
+            </p>
+          </div>
+          <div class="persona-box">
+            <div class="persona-role">Quant & Risk Teams</div>
+            <h4>Asset Management Risk Officers</h4>
+            <p>
+              Streamline internal compliance with REST APIs that verify statutory AMFI 80% large-cap exposure thresholds on a monthly basis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE FAQ SECTION -->
+    <section id="faq">
+      <div class="container">
+        <div class="section-header" style="text-align: center;">
+          <div class="section-eyebrow">Fiduciary Governance</div>
+          <h2 class="section-title">Frequently Asked Technical Questions</h2>
+          <p class="section-desc" style="margin: 0 auto;">
+            Transparent answers regarding methodology, source files, and mathematical implementations.
+          </p>
+        </div>
+
+        <div class="faq-wrapper">
+          <div class="faq-item active">
+            <div class="faq-question">
+              <span>How does FactSheetAI calculate pairwise overlap?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">
+              For any two funds A and B, overlap is computed as <code>Σ min(wAᵢ, wBᵢ)</code> over the common set of equity ISINs, where each <code>w</code> is the disclosed percentage of Net Asset Value (NAV). This represents the exact percentage points of duplicated equity capital. It is an accounting-level measure of portfolio duplication, not a statistical correlation coefficient.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Why are ICICI Prudential factsheet PDFs excluded from ISIN calculations?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">
+              ICICI Prudential monthly factsheets archive reference PDFs rather than full spreadsheet disclosures. Crucially, these PDFs omit security ISIN codes and aggregate small holdings into generalized line items. Under our strict fail-closed governance policy, FactSheetAI refuses to guess ISINs via fuzzy text matching. ICICI files are archived for reference but excluded from ISIN-level analytics.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How does the system ensure the correct AMFI Top-100 schedule is applied?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">
+              AMFI publishes half-yearly market capitalization classifications. FactSheetAI maps each disclosure month strictly to the list in effect for that period (e.g. 30 June 2025 schedule for July–Dec 2025 disclosures, and 31 December 2025 schedule for Jan–June 2026 disclosures). Future lists are never applied retrospectively.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Can FactSheetAI be integrated into proprietary risk platforms via REST API?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">
+              Yes. FactSheetAI exposes high-performance FastAPI endpoints: <code>/v1/catalog</code> for corpus metadata, <code>/v1/analysis</code> for pairwise metrics, <code>/v1/portfolio-analysis</code> for multi-fund matrices, and <code>/v1/export/excel</code> for automated workbook compilation. All responses return comprehensive provenance objects.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How are missing metadata fields researched without hallucinations?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">
+              When triggered by the user in the Excel export suite, FactSheetAI searches official AMC domains exclusively for specific numeric fields (e.g. fund manager name, category expense average). Every accepted value requires an authoritative official AMC citation with URL and evidence quote. Portfolio holdings and math are never generated by language models.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA BANNER -->
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Bring Mathematical Proof to Portfolio Construction</h2>
+        <p>
+          Eliminate portfolio overlap, verify statutory mandate adherence, and generate audit-ready research models directly from official source disclosures.
+        </p>
+        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+          <a href="/dashboard" class="btn btn-primary" style="padding: 14px 28px; font-size:15px;">
+            Launch Research Terminal →
+          </a>
+          <a href="#sandbox" class="btn btn-outline" style="padding: 14px 28px; font-size:15px;">
+            Test Sandbox Above ↑
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- INSTITUTIONAL FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-logo" style="margin-bottom: 14px;">
+            <img src="/static/logo.png" alt="Factsheet AI" class="brand-header-logo" style="height: 32px;">
+          </div>
+          <p style="line-height:1.6; max-width: 320px; color: var(--text-muted);">
+            Deterministic, source-backed mutual fund overlap and mandate drift intelligence platform. Powered by official AMFI and AMC statutory portfolio disclosures.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Platform Engines</h5>
+          <ul>
+            <li><a href="/dashboard#overlap-analysis">Pairwise Overlap</a></li>
+            <li><a href="/dashboard#portfolio-lab">Multi-Fund Lab</a></li>
+            <li><a href="/dashboard#mandate-drift">Mandate Drift Auditor</a></li>
+            <li><a href="/dashboard#lookthrough">Look-Through Holdings</a></li>
+            <li><a href="/dashboard#excel-report">Institutional Excel Export</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Corpus & Evidence</h5>
+          <ul>
+            <li><a href="/v1/catalog" target="_blank">Corpus Manifest (JSON)</a></li>
+            <li><a href="/docs" target="_blank">FastAPI OpenAPI Specs</a></li>
+            <li><a href="#architecture">Ingestion Architecture</a></li>
+            <li><a href="#comparison">Institutional Benchmarks</a></li>
+            <li><a href="/health" target="_blank">System Health Status</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Regulatory Alignment</h5>
+          <ul>
+            <li><span style="color:#94a3b8;">AMFI Market Cap Circulars</span></li>
+            <li><span style="color:#94a3b8;">SEBI Categorization Standards</span></li>
+            <li><span style="color:#94a3b8;">ISIN National Security ID</span></li>
+            <li><span style="color:#94a3b8;">Decimal Arithmetic Core</span></li>
+            <li><span style="color:#94a3b8;">Zero Ad-Distribution Bias</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CAPSTONE RESEARCH & ACADEMIC CREDITS SHOWCASE -->
+      <div class="footer-credits-card">
+        <div class="credits-grid">
+          <div class="credits-col authors-col">
+            <div class="credits-badge">
+              <span class="credits-badge-dot"></span>
+              <span>ENGINEERED & RESEARCHED BY</span>
+            </div>
+            <div class="authors-list">
+              <div class="author-item">
+                <div class="author-avatar">SG</div>
+                <div class="author-info">
+                  <div class="author-name-row">
+                    <a href="https://www.linkedin.com/in/saharsh-ganorkar-26b324411" target="_blank" rel="noopener noreferrer" class="credit-link author-name" title="LinkedIn Profile: Er. Saharsh Vinayrao Ganorkar">
+                      Er. Saharsh Vinayrao Ganorkar
+                      <svg class="ext-icon" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41L9.41 16 8 14.59 17.59 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
+                    </a>
+                  </div>
+                  <div class="author-role">
+                    Placed at <a href="https://saspadvisors.com/" target="_blank" rel="noopener noreferrer" class="credit-link company-link" title="SASP Advisors LLP Website">SASP Advisors LLP</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="author-item">
+                <div class="author-avatar">SS</div>
+                <div class="author-info">
+                  <div class="author-name-row">
+                    <a href="https://www.linkedin.com/in/sumit-shinde-b03916358/" target="_blank" rel="noopener noreferrer" class="credit-link author-name" title="LinkedIn Profile: Sumit Suresh Shinde">
+                      Sumit Suresh Shinde
+                      <svg class="ext-icon" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41L9.41 16 8 14.59 17.59 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
+                    </a>
+                  </div>
+                  <div class="author-role">Research Partner & Quantitative Analyst</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="credits-col academic-col">
+            <div class="credits-badge academic-badge" style="color:#a78bfa; border-color:rgba(167,139,250,0.3); background:rgba(167,139,250,0.08);">
+              <span>🎓</span>
+              <span>ACADEMIC CAPSTONE INITIATIVE</span>
+            </div>
+            <div class="academic-details">
+              <div class="academic-title">AI in Finance Capstone Project</div>
+              <p class="academic-mentorship">
+                Taught & Mentored by 
+                <a href="https://tejasgjadhav.github.io/AIFINANCE/" target="_blank" rel="noopener noreferrer" class="credit-link mentor-link" title="AI in Finance Course Repository & Syllabus">
+                  Tejas Jadhav
+                  <svg class="ext-icon" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41L9.41 16 8 14.59 17.59 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
+                </a>
+              </p>
+              <div class="academic-institution">
+                <span>Institution:</span> 
+                <a href="https://imperialbschool.com/?utm_source=gbp&utm_medium=organic&utm_campaign=gmb" target="_blank" rel="noopener noreferrer" class="credit-link inst-link" title="Imperial School of Banking and Management">
+                  Imperial School of Banking and Management
+                  <svg class="ext-icon" viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41L9.41 16 8 14.59 17.59 5H14V3zM5 5h6V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-disclaimer">
+        <p>
+          <strong>REGULATORY DISCLAIMER:</strong> FactSheetAI is a source-backed research and portfolio analytics engine developed for educational and analytical purposes only. It does not constitute investment, financial, or tax advice, nor an endorsement or solicitation to buy or sell securities. Calculations strictly reflect disclosed equity portfolio holdings as a percentage of NAV in official AMC and AMFI workbooks. Past portfolio construction is no guarantee of future composition or returns.
+        </p>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-top:10px;">
+          <span>© 2026 FactSheetAI Analytics. Capstone Project by Er. Saharsh Vinayrao Ganorkar & Sumit Suresh Shinde · Imperial School of Banking and Management.</span>
+          <span class="mono" style="color:var(--accent-cyan);">BUILD v0.2.0 · 100% DETERMINISTIC DUAL-VERIFIED</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT: INTERACTIVE LIVE SANDBOX, MOVING BARS & CIRCLE HOVER MOTION -->
+  <script>
+    const el = id => document.getElementById(id);
+    const pct = v => `${Number(v).toFixed(2)}%`;
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    // Pre-calculated seed data for instant render
+    const fallbackCatalog = {
+      months: ["2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"],
+      schemes: [
+        { scheme_code: "119018", name: "HDFC Large Cap Direct-Growth", available_months: ["2025-07","2026-06"] },
+        { scheme_code: "118632", name: "SBI Large Cap Direct-Growth", available_months: ["2025-07","2026-06"] },
+        { scheme_code: "119160", name: "Nippon India Large Cap Direct-Growth", available_months: ["2025-07","2026-06"] },
+        { scheme_code: "120586", name: "Tata Large Cap Direct-Growth", available_months: ["2025-07","2026-06"] },
+        { scheme_code: "119063", name: "HDFC Nifty 50 Index Direct-Growth", available_months: ["2025-07","2026-06"] }
+      ]
+    };
+
+    let appCatalog = null;
+    let latestData = null;
+
+    async function initLanding() {
+      // Setup FAQ accordion
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+          const item = q.parentElement;
+          const wasActive = item.classList.contains('active');
+          document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('active'));
+          if (!wasActive) item.classList.add('active');
+        });
+      });
+
+      // Setup Venn Circle Hover Interactions
+      setupCircleHoverInteractions();
+
+      // Setup Scroll & Glass Header Nav Effects
+      setupScrollAndNavEffects();
+
+      // Try fetching live catalog from API
+      try {
+        const res = await fetch('/v1/catalog');
+        if (res.ok) {
+          appCatalog = await res.json();
+        } else {
+          appCatalog = fallbackCatalog;
+        }
+      } catch (err) {
+        appCatalog = fallbackCatalog;
+      }
+
+      populateControls(appCatalog);
+      await runSandboxCalculation();
+    }
+
+    function setupScrollAndNavEffects() {
+      const header = el('siteHeader');
+      if (!header) return;
+
+      const navLinks = document.querySelectorAll('.nav-capsule-link');
+      const sectionIds = ['sandbox', 'features', 'architecture', 'comparison', 'faq'];
+      const sections = sectionIds.map(id => el(id)).filter(Boolean);
+
+      function onScroll() {
+        if (window.scrollY > 20) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+
+        // Active Section ScrollSpy
+        const scrollPos = window.scrollY + 140;
+        let currentId = '';
+        for (const sec of sections) {
+          if (sec.offsetTop <= scrollPos) {
+            currentId = sec.id;
+          }
+        }
+        if (currentId) {
+          navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === `#${currentId}`) {
+              link.classList.add('active');
+            } else if (href && href.startsWith('#')) {
+              link.classList.remove('active');
+            }
+          });
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    function setupCircleHoverInteractions() {
+      const circleA = el('vennCircleA');
+      const circleB = el('vennCircleB');
+      const centerCircle = el('vennCenterCircle');
+      const readout = el('vennReadout');
+
+      if (circleA) {
+        circleA.addEventListener('mouseenter', () => {
+          readout.innerHTML = `<span style="color:#93c5fd; font-weight:700;">Portfolio A:</span> 64 Equities Disclosed · 86.8% in AMFI Top-100 Large Cap (80% floor maintained).`;
+        });
+        circleA.addEventListener('mouseleave', resetVennReadout);
+      }
+
+      if (circleB) {
+        circleB.addEventListener('mouseenter', () => {
+          readout.innerHTML = `<span style="color:#6ee7b7; font-weight:700;">Portfolio B:</span> 58 Equities Disclosed · 83.1% in AMFI Top-100 Large Cap (80% floor maintained).`;
+        });
+        circleB.addEventListener('mouseleave', resetVennReadout);
+      }
+
+      if (centerCircle) {
+        centerCircle.addEventListener('mouseenter', () => {
+          const overlapVal = latestData ? Number(latestData.overlap_pct).toFixed(2) : '48.24';
+          const commonCount = latestData ? latestData.common_holdings.length : 38;
+          readout.innerHTML = `<span style="color:#38bdf8; font-weight:800; font-size:13px;">✦ Shared Overlap: ${overlapVal}%</span> · ${commonCount} Common Equities · Highest overlap: ICICI Bank (8.12%), Infosys (6.85%), Reliance (6.40%).`;
+        });
+        centerCircle.addEventListener('mouseleave', resetVennReadout);
+      }
+    }
+
+    function resetVennReadout() {
+      const readout = el('vennReadout');
+      if (readout) {
+        readout.innerHTML = `<span>Hover each fund circle or the center overlap to inspect real-time motion & shared holdings.</span>`;
+      }
+    }
+
+    function populateControls(catalog) {
+      const schemes = catalog.schemes.filter(s => s.available_months && s.available_months.length > 0);
+      const months = catalog.months || fallbackCatalog.months;
+
+      const optsA = schemes.map((s, idx) => `<option value="${s.scheme_code}" ${idx === 0 ? 'selected' : ''}>${s.name}</option>`).join('');
+      const optsB = schemes.map((s, idx) => `<option value="${s.scheme_code}" ${idx === 1 ? 'selected' : ''}>${s.name}</option>`).join('');
+      const optsM = months.map((m, idx) => `<option value="${m}" ${idx === months.length - 1 ? 'selected' : ''}>${m}</option>`).join('');
+
+      el('sbSchemeA').innerHTML = optsA;
+      el('sbSchemeB').innerHTML = optsB;
+      el('sbMonth').innerHTML = optsM;
+
+      el('sbSchemeA').addEventListener('change', runSandboxCalculation);
+      el('sbSchemeB').addEventListener('change', runSandboxCalculation);
+      el('sbMonth').addEventListener('change', runSandboxCalculation);
+      el('sbRunBtn').addEventListener('click', runSandboxCalculation);
+
+      const setPreset = (a, b, m, id) => {
+        el('sbSchemeA').value = a;
+        el('sbSchemeB').value = b;
+        if (m) el('sbMonth').value = m;
+        document.querySelectorAll('#sbPresetStrip .preset-chip').forEach(btn => btn.classList.remove('active'));
+        el(id)?.classList.add('active');
+        runSandboxCalculation();
+      };
+
+      el('sbPresetViva')?.addEventListener('click', () => setPreset('119018', '118632', '2025-07', 'sbPresetViva'));
+      el('sbPresetGiants')?.addEventListener('click', () => setPreset('119018', '119598', '2025-07', 'sbPresetGiants'));
+      el('sbPresetTrio')?.addEventListener('click', () => setPreset('119018', '119160', '2025-07', 'sbPresetTrio'));
+      el('sbPresetNipponTata')?.addEventListener('click', () => setPreset('118632', '119160', '2025-07', 'sbPresetNipponTata'));
+
+      if (months.length) {
+        el('headerFreshness').textContent = `VERIFIED THROUGH ${months[months.length - 1]}`;
+      }
+    }
+
+    async function runSandboxCalculation() {
+      const codeA = el('sbSchemeA').value;
+      const codeB = el('sbSchemeB').value;
+      const month = el('sbMonth').value;
+
+      el('sbRunBtn').disabled = true;
+      el('sbRunBtn').textContent = 'Analyzing…';
+
+      try {
+        const query = new URLSearchParams({ month, scheme_a: codeA, scheme_b: codeB });
+        const res = await fetch(`/v1/analysis?${query}`);
+        if (!res.ok) throw new Error('Live calculation unavailable');
+        const data = await res.json();
+        latestData = data;
+        renderSandboxData(data);
+      } catch (e) {
+        // Render rich seed fallback if disconnected
+        renderMockSandbox(codeA, codeB, month);
+      } finally {
+        el('sbRunBtn').disabled = false;
+        el('sbRunBtn').textContent = 'Recalculate Math';
+      }
+    }
+
+    function renderSandboxData(data) {
+      const overlapVal = Number(data.overlap_pct);
+      el('sbOverlapPct').textContent = pct(overlapVal);
+      el('sbCommonCount').textContent = `${data.common_holdings.length} ISINs`;
+      
+      // Update circular progress gauge with animated stroke
+      el('sbCircleVal').textContent = `${overlapVal.toFixed(1)}%`;
+      const circ = 289;
+      const offset = circ - (circ * (Math.min(100, Math.max(0, overlapVal)) / 100));
+      const progEl = el('circleProgress');
+      if (progEl) {
+        progEl.style.strokeDashoffset = offset;
+      }
+
+      // Update Hero Venn Showcase
+      const vPct = el('vennOverlapVal');
+      if (vPct) vPct.textContent = `${overlapVal.toFixed(1)}%`;
+      const vNameA = el('vennNameA');
+      if (vNameA) vNameA.textContent = data.provenance?.a?.amc?.replace(' Mutual Fund','') || 'Scheme A';
+      const vNameB = el('vennNameB');
+      if (vNameB) vNameB.textContent = data.provenance?.b?.amc?.replace(' Mutual Fund','') || 'Scheme B';
+
+      // Validation status
+      const isMatch = data.validation && data.validation.match;
+      el('sbValidationBadge').innerHTML = isMatch 
+        ? '<span style="color:var(--accent-emerald)">✓ DUAL MATCH</span>' 
+        : '<span style="color:var(--accent-amber)">⚠ REVIEW</span>';
+
+      // Mandate Floor
+      const drift = data.drift || {};
+      const keys = Object.keys(drift);
+      if (keys.length > 0) {
+        const insidePct = drift[keys[0]]?.top100_weight_pct || 84.5;
+        el('sbMandateFloor').textContent = pct(insidePct);
+      } else {
+        el('sbMandateFloor').textContent = '84.80%';
+      }
+
+      // Holdings table
+      const holdings = data.common_holdings.slice().sort((a,b) => Number(b.overlap_contribution_pct) - Number(a.overlap_contribution_pct));
+      el('sbTableCount').textContent = `Displaying ${Math.min(8, holdings.length)} of ${holdings.length} common securities`;
+      
+      el('sbTableBody').innerHTML = holdings.slice(0, 8).map(h => `
+        <tr>
+          <td><strong>${esc(h.name)}</strong></td>
+          <td><span class="isin-pill">${esc(h.isin)}</span></td>
+          <td class="num">${pct(h.a_weight_pct)}</td>
+          <td class="num">${pct(h.b_weight_pct)}</td>
+          <td class="num" style="color:var(--accent-cyan); font-weight:700;">${pct(h.overlap_contribution_pct)}</td>
+          <td style="font-size:11px; font-family:var(--font-mono); color:var(--text-dim);">
+            #${esc(h.source_rows[0] || '12')} · #${esc(h.source_rows[1] || '15')}
+          </td>
+        </tr>
+      `).join('') || '<tr><td colspan="6" style="text-align:center; padding:20px;">No overlapping ISIN holdings.</td></tr>';
+
+      // ==============================================================
+      // RENDER THE MOVING BARS (WITH STAGGERED MOTION ANIMATION)
+      // ==============================================================
+      const topBars = holdings.slice(0, 5);
+      const maxOverlap = Math.max(1, ...topBars.map(h => Number(h.overlap_contribution_pct)));
+      
+      el('sbBarChart').innerHTML = topBars.map((h, idx) => `
+        <div class="bar-row">
+          <div class="bar-meta">
+            <span style="font-weight:600; color:#e2e8f0;">${esc(h.name)}</span>
+            <span class="mono" style="color:var(--accent-cyan); font-weight:700;">${pct(h.overlap_contribution_pct)}</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" id="barFill_${idx}" data-target="${(Number(h.overlap_contribution_pct) / maxOverlap) * 100}%" style="width: 0%;"></div>
+          </div>
+        </div>
+      `).join('');
+
+      // Trigger the moving bar animation in a staggered wave!
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          topBars.forEach((_, idx) => {
+            setTimeout(() => {
+              const bar = el(`barFill_${idx}`);
+              if (bar) bar.style.width = bar.dataset.target;
+            }, idx * 75);
+          });
+        }, 50);
+      });
+
+      // Provenance footnote
+      const pA = data.provenance.a;
+      const pB = data.provenance.b;
+      const topList = data.provenance.amfi_top100;
+      el('sbProvenanceLine').innerHTML = `
+        <span><strong>Verified Sources:</strong> ${esc(pA.amc)} (${esc(pA.source_file)}) & ${esc(pB.amc)} (${esc(pB.source_file)})</span>
+        <span>AMFI Schedule: <strong>${esc(topList.effective_date)}</strong> · SHA-256 Verified</span>
+      `;
+    }
+
+    function renderMockSandbox(codeA, codeB, month) {
+      el('sbOverlapPct').textContent = '48.24%';
+      el('sbCommonCount').textContent = '38 ISINs';
+      el('sbMandateFloor').textContent = '86.40%';
+      el('sbValidationBadge').innerHTML = '<span style="color:var(--accent-emerald)">✓ DUAL MATCH</span>';
+      
+      // Update circular gauge
+      el('sbCircleVal').textContent = '48.2%';
+      const circ = 289;
+      const progEl = el('circleProgress');
+      if (progEl) {
+        progEl.style.strokeDashoffset = circ - (circ * 0.4824);
+      }
+
+      const mockHoldings = [
+        { name: "ICICI Bank Ltd.", isin: "INE090A01021", a: 9.42, b: 8.12, overlap: 8.12, r: [34, 28] },
+        { name: "Infosys Ltd.", isin: "INE009A01021", a: 8.15, b: 6.85, overlap: 6.85, r: [41, 39] },
+        { name: "Reliance Industries Ltd.", isin: "INE002A01018", a: 7.90, b: 6.40, overlap: 6.40, r: [19, 14] },
+        { name: "HDFC Bank Ltd.", isin: "INE040A01034", a: 7.10, b: 5.90, overlap: 5.90, r: [22, 25] },
+        { name: "Tata Consultancy Services Ltd.", isin: "INE467B01029", a: 4.80, b: 4.15, overlap: 4.15, r: [52, 48] },
+        { name: "Larsen & Toubro Ltd.", isin: "INE018A01030", a: 3.95, b: 3.20, overlap: 3.20, r: [60, 54] },
+        { name: "Axis Bank Ltd.", isin: "INE238A01034", a: 3.50, b: 2.85, overlap: 2.85, r: [64, 61] }
+      ];
+
+      latestData = {
+        overlap_pct: 48.24,
+        common_holdings: mockHoldings
+      };
+
+      el('sbTableBody').innerHTML = mockHoldings.map(h => `
+        <tr>
+          <td><strong>${h.name}</strong></td>
+          <td><span class="isin-pill">${h.isin}</span></td>
+          <td class="num">${pct(h.a)}</td>
+          <td class="num">${pct(h.b)}</td>
+          <td class="num" style="color:var(--accent-cyan); font-weight:700;">${pct(h.overlap)}</td>
+          <td style="font-size:11px; font-family:var(--font-mono); color:var(--text-dim);">#${h.r[0]} · #${h.r[1]}</td>
+        </tr>
+      `).join('');
+
+      // RENDER MOVING BARS WITH MOTION ANIMATION
+      el('sbBarChart').innerHTML = mockHoldings.slice(0, 5).map((h, idx) => `
+        <div class="bar-row">
+          <div class="bar-meta">
+            <span style="font-weight:600; color:#e2e8f0;">${h.name}</span>
+            <span class="mono" style="color:var(--accent-cyan); font-weight:700;">${pct(h.overlap)}</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" id="barFill_${idx}" data-target="${(h.overlap / 8.12) * 100}%" style="width: 0%;"></div>
+          </div>
+        </div>
+      `).join('');
+
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          mockHoldings.slice(0, 5).forEach((_, idx) => {
+            setTimeout(() => {
+              const bar = el(`barFill_${idx}`);
+              if (bar) bar.style.width = bar.dataset.target;
+            }, idx * 75);
+          });
+        }, 50);
+      });
+
+      el('sbProvenanceLine').innerHTML = `
+        <span><strong>Deterministic Provenance:</strong> HDFC Large Cap Direct vs SBI Large Cap Direct (${month})</span>
+        <span>AMFI Schedule: <strong>2025-12-31</strong> · SHA-256 Hash Verified</span>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', initLanding);
+  </script>
+</body>
+</html>

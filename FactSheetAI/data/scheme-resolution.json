@@ -1,0 +1,161 @@
+{
+  "registry_source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b",
+  "mappings": [
+    {
+      "scheme_code": "120586",
+      "configured_name": "ICICI Prudential Large Cap Fund",
+      "amfi_name": "ICICI Prudential Large Cap Fund (erstwhile Bluechip Fund)",
+      "isin": "INF109K016L0",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 2559,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "119018",
+      "configured_name": "HDFC Large Cap Fund",
+      "amfi_name": "HDFC Large Cap Fund",
+      "isin": "INF179K01YV8",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 2548,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "119598",
+      "configured_name": "SBI Large Cap Fund",
+      "amfi_name": "SBI Large Cap Fund",
+      "isin": "INF200K01QX4",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 2628,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "118632",
+      "configured_name": "Nippon India Large Cap Fund",
+      "amfi_name": "Nippon India Large Cap Fund",
+      "isin": "INF204K01XI3",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 2594,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "120152",
+      "configured_name": "Kotak Large Cap Fund",
+      "amfi_name": "Kotak Large Cap Fund",
+      "isin": "INF174K01KW6",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 2570,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "120465",
+      "configured_name": "Axis Large Cap Fund",
+      "amfi_name": "Axis Large Cap Fund",
+      "isin": "INF846K01DP8",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 4494,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "118825",
+      "configured_name": "Mirae Asset Large Cap Fund",
+      "amfi_name": "Mirae Asset Large Cap Fund",
+      "isin": "INF769K01AX2",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 4562,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "119250",
+      "configured_name": "DSP Large Cap Fund",
+      "amfi_name": "DSP Large Cap Fund",
+      "isin": "INF740K01PR3",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 2523,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "120656",
+      "configured_name": "UTI - Large Cap Fund",
+      "amfi_name": "UTI - Large Cap Fund",
+      "isin": "INF789F01US8",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 2663,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "119528",
+      "configured_name": "Aditya Birla Sun Life Large Cap Fund",
+      "amfi_name": "Aditya Birla Sun Life Large Cap Fund",
+      "isin": "INF209K01YY7",
+      "plan": "Direct Plan",
+      "option": "GROWTH",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 2488,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "119160",
+      "configured_name": "Tata Large Cap Fund",
+      "amfi_name": "Tata Large Cap Fund",
+      "isin": "INF277K01QZ7",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 2642,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "118531",
+      "configured_name": "Franklin India Large Cap Fund",
+      "amfi_name": "Franklin India Large Cap Fund",
+      "isin": "INF090I01FN7",
+      "plan": "Direct Plan",
+      "option": "Growth",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 2543,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    },
+    {
+      "scheme_code": "119063",
+      "configured_name": "HDFC Nifty 50 Index Fund",
+      "amfi_name": "HDFC Nifty 50 Index Fund",
+      "isin": "INF179K01WM1",
+      "plan": "Direct Plan",
+      "option": "Growth Option",
+      "nav_effective_date": "16-Oct-2026",
+      "source_file": "data/raw/amfi/nav.txt",
+      "source_line": 12002,
+      "source_sha256": "92d7bd6812ecdf3ea1643e38ed5df3373ab9debde9fb11c5951c285da48d491b"
+    }
+  ]
+}

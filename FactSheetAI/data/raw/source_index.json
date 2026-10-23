@@ -1,0 +1,505 @@
+[
+  {
+    "file": "data/raw/amc/hdfc/2025-07.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-07",
+    "url": "https://files.hdfcfund.com/s3fs-public/2025-08/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2031%20July%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2025-08.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-08",
+    "url": "https://files.hdfcfund.com/s3fs-public/2025-09/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2031%20August%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2025-09.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-09",
+    "url": "https://files.hdfcfund.com/s3fs-public/2025-10/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2030%20September%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2025-10.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-10",
+    "url": "https://files.hdfcfund.com/s3fs-public/2025-11/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2031%20October%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2025-11.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-11",
+    "url": "https://files.hdfcfund.com/s3fs-public/2025-12/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2030%20November%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2025-12.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-12",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-01/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2031%20December%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2026-01.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-01",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-02/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2031%20January%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2026-02.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-02",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-03/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2028%20February%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2026-03.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-03",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-04/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2031%20March%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2026-04.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-04",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-05/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2030%20April%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2026-05.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-05",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-06/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2031%20May%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/2026-06.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-06",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-07/Monthly%20HDFC%20Large%20Cap%20Fund%20-%2030%20June%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2025-07.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-07",
+    "url": "https://files.hdfcfund.com/s3fs-public/2025-08/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2031%20July%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2025-08.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-08",
+    "url": "https://files.hdfcfund.com/s3fs-public/2025-09/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2031%20August%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2025-09.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-09",
+    "url": "https://files.hdfcfund.com/s3fs-public/2025-10/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2030%20September%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2025-10.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-10",
+    "url": "https://files.hdfcfund.com/s3fs-public/2025-11/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2031%20October%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2025-11.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-11",
+    "url": "https://files.hdfcfund.com/s3fs-public/2025-12/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2030%20November%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2025-12.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2025-12",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-01/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2031%20December%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2026-01.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-01",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-02/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2031%20January%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2026-02.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-02",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-03/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2028%20February%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2026-03.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-03",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-04/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2031%20March%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2026-04.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-04",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-05/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2030%20April%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2026-05.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-05",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-06/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2031%20May%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/hdfc/nifty50-2026-06.xlsx",
+    "amc": "HDFC Mutual Fund",
+    "disclosure_month": "2026-06",
+    "url": "https://files.hdfcfund.com/s3fs-public/2026-07/Monthly%20HDFC%20Nifty%2050%20Index%20Fund%20-%2030%20June%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/icici/2025-07.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2025-07",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2025-2026/Complete%20Factsheet%20July%202025.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2025-08.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2025-08",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2025-2026/Complete%20Factsheet%20August%202025.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2025-09.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2025-09",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2025-2026/Complete%20Factsheet%20September%202025.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2025-10.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2025-10",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2025-2026/Complete%20Factsheet%20October%202025.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2025-11.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2025-11",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2025-2026/Complete%20Factsheet%20November%202025.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2025-12.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2025-12",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2025-2026/Complete%20Factsheet%20December%202025.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2026-01.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2026-01",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2025-2026/Complete%20Factsheet%20January%202026.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2026-02.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2026-02",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2025-2026/Complete%20Factsheet%20February%202026.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2026-03.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2026-03",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2025-2026/Complete%20Factsheet%20March%202026.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2026-04.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2026-04",
+    "url": "https://digitalfactsheet.icicipruamc.com/fact/pdf/fund-factsheet-for-april-2026.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2026-05.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2026-05",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2026-2027/Complete%20Factsheet%20May%202026.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/icici/2026-06.pdf",
+    "amc": "ICICI Prudential Mutual Fund",
+    "disclosure_month": "2026-06",
+    "url": "https://www.icicipruamc.com/blob/downloads/Files/Historic%20Factsheets/2026-2027/Complete%20Factsheet%20June%202026.pdf",
+    "source_type": "factsheet_reference_only",
+    "engine_eligible": false,
+    "limitation": "Factsheet PDF does not provide complete equity holdings with ISINs; excluded from ISIN-level overlap."
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2025-07.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2025-07",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-31-July-25.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2025-08.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2025-08",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-31-Aug-25.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2025-09.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2025-09",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-30-Sep-25.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2025-10.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2025-10",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-31-Oct-25.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2025-11.xls",
+    "amc": "Nippon India",
+    "disclosure_month": "2025-11",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-Nov-25.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2025-12.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2025-12",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-31-Dec-25.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2026-01.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2026-01",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-31-Jan-26.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2026-02.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2026-02",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-28-Feb-26.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2026-03.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2026-03",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-31-Mar-26.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2026-04.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2026-04",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-30-April-26.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2026-05.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2026-05",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-31-May-26.xls"
+  },
+  {
+    "file": "data/raw/amc/nippon-india/2026-06.xls",
+    "amc": "Nippon India Mutual Fund",
+    "disclosure_month": "2026-06",
+    "url": "https://mf.nipponindiaim.com/InvestorServices/FactsheetsDocuments/NIMF-MONTHLY-PORTFOLIO-30-Jun-26.xls"
+  },
+  {
+    "file": "data/raw/amc/sbi/2025-07.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2025-07",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-31st-july-2025.xlsx?sfvrsn=97231ad8_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2025-08.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2025-08",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-31st-august-2025.xlsx?sfvrsn=b6ec5c20_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2025-09.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2025-09",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-scheme-monthly-portfolio---as-on-30th-september-2025.xlsx?sfvrsn=72d21cf2_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2025-10.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2025-10",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-31st-october-2025.xlsx?sfvrsn=ffbfbec5_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2025-11.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2025-11",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-30th-november-2025.xlsx?sfvrsn=45d16d60_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2025-12.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2025-12",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-31st-december-2025.xlsx?sfvrsn=71c696a7_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2026-01.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2026-01",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-31st-january-2026.xlsx?sfvrsn=bf862a46_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2026-02.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2026-02",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-28th-february-2026.xlsx?sfvrsn=5ca2382d_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2026-03.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2026-03",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-31st-march-2026.xlsx?sfvrsn=e7c44034_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2026-04.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2026-04",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-30th-april-2026.xlsx?sfvrsn=fbc4d18a_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2026-05.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2026-05",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-31st-may-2026.xlsx?sfvrsn=1e792ce4_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/sbi/2026-06.xlsx",
+    "amc": "SBI Mutual Fund",
+    "disclosure_month": "2026-06",
+    "url": "https://www.sbimf.com/docs/default-source/scheme-portfolios/all-schemes-monthly-portfolio---as-on-30th-june-2026.xlsx?sfvrsn=2891d9a4_2",
+    "source_type": "monthly_portfolio"
+  },
+  {
+    "file": "data/raw/amc/tata/2025-07.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2025-07",
+    "url": "https://betacms.tatamutualfund.com/system/files/2025-08/Monthly%20Portfolio%20as%20on%2031st%20July%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2025-08.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2025-08",
+    "url": "https://betacms.tatamutualfund.com/system/files/2025-09/Monthly%20Portfolio%20as%20on%2031st%20August%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2025-09.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2025-09",
+    "url": "https://betacms.tatamutualfund.com/system/files/2025-10/Monthly%20Portfolio%20as%20on%2030th%20September%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2025-10.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2025-10",
+    "url": "https://betacms.tatamutualfund.com/system/files/2025-11/Monthly%20Portfolio%20as%2031st%20October%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2025-11.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2025-11",
+    "url": "https://betacms.tatamutualfund.com/system/files/2025-12/Monthly%20Portfolio%20as%20on%2030th%20November%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2025-12.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2025-12",
+    "url": "https://betacms.tatamutualfund.com/system/files/2026-01/Monthly%20Portfolio%20as%20on%2031st%20December%202025.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2026-01.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2026-01",
+    "url": "https://betacms.tatamutualfund.com/system/files/2026-02/Monthly%20Portfolio%20as%20on%2031st%20January%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2026-02.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2026-02",
+    "url": "https://betacms.tatamutualfund.com/system/files/2026-03/Monthly%20Portfolio%20as%20on%2028th%20February%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2026-03.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2026-03",
+    "url": "https://betacms.tatamutualfund.com/system/files/2026-04/Monthly%20Portfolio%20as%20on%2031st%20March%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2026-04.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2026-04",
+    "url": "https://betacms.tatamutualfund.com/system/files/2026-05/Monthly%20Portfolio%20as%20on%2030th%20April%202026%20%281%29.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2026-05.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2026-05",
+    "url": "https://betacms.tatamutualfund.com/system/files/2026-06/Monthly%20Portfolio%20as%20on%2031st%20May%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amc/tata/2026-06.xlsx",
+    "amc": "Tata Mutual Fund",
+    "disclosure_month": "2026-06",
+    "url": "https://betacms.tatamutualfund.com/system/files/2026-07/Monthly%20Portfolio%20as%20on%2030th%20June%202026.xlsx"
+  },
+  {
+    "file": "data/raw/amfi/amfi_caps_2025-06.xlsx",
+    "amc": "AMFI",
+    "effective_date": "2025-06-30",
+    "url": "https://www.amfiindia.com/Themes/Theme1/downloads/AverageMarketCapitalization30Jun2025.xlsx"
+  },
+  {
+    "file": "data/raw/amfi/amfi_caps_2025.xlsx",
+    "amc": "AMFI",
+    "effective_date": "2025-12-31",
+    "url": "https://www.amfiindia.com/Themes/Theme1/downloads/AverageMarketCapitalization31Dec2025.xlsx"
+  },
+  {
+    "file": "data/raw/amfi/amfi_caps_2026.xlsx",
+    "amc": "AMFI",
+    "effective_date": "2026-06-30",
+    "url": "https://portal.amfiindia.com/spages/AverageMarketCapitalization30Jun2026.xlsx"
+  },
+  {
+    "file": "data/raw/amfi/nav.txt",
+    "amc": "AMFI",
+    "url": "https://www.amfiindia.com/spages/NAVAll.txt"
+  }
+]
